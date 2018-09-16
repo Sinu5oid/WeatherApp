@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">WeatherApp</string>
+    <string name="weather_app_key" translatable="false">0bb0ae1eff09edd7f903a6cef0cb3039</string>
+    <string name="city_id" translatable="false">1496153</string>
+    <string name="base_url" translatable="false">https://api.openweathermap.org/data/2.5/weather</string>
+    <string name="response_error">Server responded with error</string>
+    <string name="response_success">Server responded successfully</string>
+    <string name="language_code" translatable="false">ru</string>
+    <string name="units_code" translatable="false">metric</string>
+    <string name="degree_symbol" translatable="false">°</string>
+    <string name="celsium" translatable="false">C</string>
+</resources>
