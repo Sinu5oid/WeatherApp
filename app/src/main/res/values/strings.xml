@@ -1,12 +1,30 @@
 <resources>
-    <string name="app_name" translatable="false">WeatherApp</string>
+    <string name="app_name">WeatherApp</string>
     <string name="weather_app_key" translatable="false">0bb0ae1eff09edd7f903a6cef0cb3039</string>
     <string name="city_id" translatable="false">1496153</string>
     <string name="base_url" translatable="false">https://api.openweathermap.org/data/2.5/weather</string>
     <string name="response_error">Server responded with error</string>
     <string name="response_success">Server responded successfully</string>
-    <string name="language_code" translatable="false">ru</string>
+    <string name="language_code">en</string>
     <string name="units_code" translatable="false">metric</string>
     <string name="degree_symbol" translatable="false">°</string>
     <string name="celsium" translatable="false">C</string>
+    <string name="temp_label">Current temp</string>
+    <string name="temp_min_label">Min temp</string>
+    <string name="temp_max_label">Max temp</string>
+    <string name="humidity_label">Humidity</string>
+    <string name="not_available">n/a</string>
+    <string name="city">City</string>
+    <string name="description">Description</string>
+    <string name="wind_label">Wind speed</string>
+    <string name="speed_units">m/s</string>
+    <string name="pending_state">pending</string>
+    <string name="pressure_label">Atmo pressure</string>
+    <string name="pressure_units">mmHg</string>
+    <string name="no_connection">Server is unreachable</string>
+    <string name="email" translatable="false">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="login_success">Valid credentials</string>
+    <string name="login_fail">Invalid credentials</string>
 </resources>

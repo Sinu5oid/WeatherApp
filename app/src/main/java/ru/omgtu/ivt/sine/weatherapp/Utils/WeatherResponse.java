@@ -55,7 +55,6 @@ import org.json.JSONObject;
 
 public class WeatherResponse {
 
-
     public String getDescription() {
         return description;
     }
@@ -64,7 +63,7 @@ public class WeatherResponse {
         return name;
     }
 
-    public double getTemp() {
+    public long getTemp() {
         return temp;
     }
 
@@ -72,52 +71,76 @@ public class WeatherResponse {
         return pressure;
     }
 
-    public double getHumidity() {
+    public long getHumidity() {
         return humidity;
     }
 
-    public double getTemp_min() {
+    public long getTemp_min() {
         return temp_min;
     }
 
-    public double getTemp_max() {
+    public long getTemp_max() {
         return temp_max;
     }
 
-    public double getWind() {
+    public long getWind() {
         return wind;
+    }
+
+    public boolean getErrorFlag() {
+        return errorFlag;
     }
 
     private String
             description,
             name;
-    private double
+    private long
             temp,
-            pressure,
             humidity,
             temp_min,
             temp_max,
             wind;
+    private double pressure;
+    private boolean errorFlag;
 
-    public WeatherResponse(JSONObject o) {
+    public WeatherResponse(JSONObject jsonObject) {
+        if (jsonObject == null) {
+            resetFieldsByDefault();
+            errorFlag = true;
+            return;
+        }
+
         try {
-            JSONArray weather_array = o.getJSONArray("weather");
+            JSONArray weather_array = jsonObject.getJSONArray("weather");
             JSONObject weather = weather_array.getJSONObject(0);
             this.description = weather.getString("description");
 
-            JSONObject main = o.getJSONObject("main");
-            this.temp = main.getDouble("temp");
-            this.pressure = main.getDouble("pressure");
-            this.humidity = main.getDouble("humidity");
-            this.temp_min = main.getDouble("temp_min");
-            this.temp_max = main.getDouble("temp_max");
+            JSONObject main = jsonObject.getJSONObject("main");
 
-            JSONObject wind = o.getJSONObject("wind");
-            this.wind = wind.getDouble("speed");
+            this.temp = Math.round(main.getDouble("temp"));
+            this.pressure = main.getDouble("pressure") * 0.75006375541921;
+            this.humidity = Math.round(main.getDouble("humidity"));
+            this.temp_min = Math.round(main.getDouble("temp_min"));
+            this.temp_max = Math.round(main.getDouble("temp_max"));
 
-            this.name = o.getString("name");
+            JSONObject wind = jsonObject.getJSONObject("wind");
+            this.wind = Math.round(wind.getDouble("speed"));
+
+            this.name = jsonObject.getString("name");
         } catch (JSONException je) {
+            resetFieldsByDefault();
             Log.d("PARSING", "Error while parsing JSON: " + je.getMessage());
         }
+    }
+
+    private void resetFieldsByDefault(){
+        description = "";
+        name = "";
+        temp = 0;
+        humidity = 0;
+        temp_min = 0;
+        temp_max = 0;
+        wind = 0;
+        pressure = 0;
     }
 }

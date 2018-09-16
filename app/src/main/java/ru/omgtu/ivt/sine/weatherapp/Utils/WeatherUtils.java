@@ -37,7 +37,9 @@ public class WeatherUtils {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        weatherResponse = new WeatherResponse(null);
                         Log.d("HTTP", "Response error: " + error);
+                        callback.onResponseCallback(weatherResponse);
                     }
                 });
         queue.add(jsonObjectRequest);

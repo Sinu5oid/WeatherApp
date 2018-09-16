@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Погода</string>
+    <string name="language_code">ru</string>
     <string name="response_error">Сервер вернул ошибку</string>
     <string name="response_success">Сервер вернул данные</string>
+    <string name="temp_label">Текущая температура</string>
+    <string name="temp_min_label">Минимум по городу</string>
+    <string name="temp_max_label">Максимум по городу</string>
+    <string name="humidity_label">Влажность</string>
+    <string name="not_available">н/д</string>
+    <string name="city">Город</string>
+    <string name="description">Описание</string>
+    <string name="wind_label">Скорость ветра</string>
+    <string name="speed_units">м/c</string>
+    <string name="pending_state">обновляется</string>
+    <string name="pressure_label">Атмосферное давление</string>
+    <string name="pressure_units">мм рт.ст.</string>
+    <string name="no_connection">Сервер недоступен</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="login_success">Данные авторизации верны</string>
+    <string name="login_fail">Неверные данные авторизации</string>
 </resources>
