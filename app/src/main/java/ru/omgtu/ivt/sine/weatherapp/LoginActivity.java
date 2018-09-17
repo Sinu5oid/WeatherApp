@@ -21,8 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView login;
     TextView password;
 
-    HashMap<String, String> map;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +29,11 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
-        map = helper.getCredentials();
         weatherActivityIntent = new Intent(this, WeatherActivity.class);
     }
 
     protected void onClick(View view) {
-        if (map.containsKey(login.getText().toString()) && map.containsValue(password.getText().toString())) {
+        if (helper.isValidCredentials(login, password)) {
             credentialsToast = Toast.makeText(getApplicationContext(),
                     getString(R.string.login_success), Toast.LENGTH_SHORT);
             credentialsToast.show();

@@ -17,8 +17,11 @@
     <string name="pressure_label">Атмосферное давление</string>
     <string name="pressure_units">мм рт.ст.</string>
     <string name="no_connection">Сервер недоступен</string>
-    <string name="password">Пароль</string>
+    <string name="email">Введите логин здесь</string>
+    <string name="password">Введите пароль здесь</string>
     <string name="login">Войти</string>
     <string name="login_success">Данные авторизации верны</string>
     <string name="login_fail">Неверные данные авторизации</string>
+    <string name="login_label">Логин</string>
+    <string name="password_label">Пароль</string>
 </resources>

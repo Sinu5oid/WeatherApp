@@ -22,9 +22,11 @@
     <string name="pressure_label">Atmo pressure</string>
     <string name="pressure_units">mmHg</string>
     <string name="no_connection">Server is unreachable</string>
-    <string name="email" translatable="false">E-mail</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="email">enter login here</string>
+    <string name="password">enter password here</string>
+    <string name="login">Log in</string>
     <string name="login_success">Valid credentials</string>
     <string name="login_fail">Invalid credentials</string>
+    <string name="login_label">Login</string>
+    <string name="password_label">Password</string>
 </resources>
