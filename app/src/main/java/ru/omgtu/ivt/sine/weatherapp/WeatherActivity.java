@@ -1,5 +1,6 @@
 package ru.omgtu.ivt.sine.weatherapp;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,10 +56,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
         utils.makeRequest(this);
     }
 
+    @SuppressLint("DefaultLocale")
     public void onResponseCallback(WeatherResponse wr) {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {}
         if (wr.getErrorFlag()) {
             city.setText(getString(R.string.city));
             mainTemp.setText(getString(R.string.no_connection));
