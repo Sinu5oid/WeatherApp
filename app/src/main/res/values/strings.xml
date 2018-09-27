@@ -3,8 +3,8 @@
     <string name="weather_app_key" translatable="false">0bb0ae1eff09edd7f903a6cef0cb3039</string>
     <string name="city_id" translatable="false">1496153</string>
     <string name="base_url" translatable="false">https://api.openweathermap.org/data/2.5/weather</string>
-    <string name="response_error">Server responded with error</string>
-    <string name="response_success">Server responded successfully</string>
+    <string name="error_parsing">JSON parging error</string>
+    <string name="error_connection">Server didn\'t respond or bad request</string>
     <string name="language_code">en</string>
     <string name="units_code" translatable="false">metric</string>
     <string name="degree_symbol" translatable="false">°</string>
@@ -17,7 +17,8 @@
     <string name="city">City</string>
     <string name="description">Description</string>
     <string name="wind_label">Wind speed</string>
-    <string name="speed_units">m/s</string>
+    <string name="speed_units_metersph">m/s</string>
+    <string name="speed_units_milesph">mph</string>
     <string name="pending_state">pending</string>
     <string name="pressure_label">Atmo pressure</string>
     <string name="pressure_units">mmHg</string>
@@ -29,4 +30,21 @@
     <string name="login_fail">Invalid credentials</string>
     <string name="login_label">Login</string>
     <string name="password_label">Password</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="metric_label" translatable="false">°C</string>
+    <string name="imperial_label" translatable="false">°F</string>
+    <string name="standart_label" translatable="false">K</string>
+    <string name="units_label">Units</string>
+    <string name="method_predefined">Use predefined</string>
+    <string name="method_enter">Enter below</string>
+    <string name="enter_city_label">Enter city here</string>
+    <string name="make_request">Make request</string>
+    <string name="error_message_label">Error</string>
+    <string-array name="cities" translatable="false">
+        <item>Amsterdam</item>
+        <item>Bremen</item>
+        <item>Moscow</item>
+        <item>Omsk</item>
+        <item>Saint Petersburg</item>
+    </string-array>
 </resources>

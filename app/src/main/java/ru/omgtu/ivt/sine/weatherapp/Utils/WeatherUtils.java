@@ -16,15 +16,18 @@ import ru.omgtu.ivt.sine.weatherapp.R;
 
 public class WeatherUtils {
 
-    public WeatherUtils(WeatherCallback callback){
+    private WeatherResponse weatherResponse;
+    private WeatherCallback callback;
+
+    public WeatherUtils(WeatherCallback callback) {
         this.callback = callback;
     }
 
-    public void makeRequest(Context context) {
+    public void makeRequest(final Context context, RequestParameters requestParameters) {
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
-                buildUrl(context),
+                buildUrl(context, requestParameters),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -39,22 +42,29 @@ public class WeatherUtils {
                     public void onErrorResponse(VolleyError error) {
                         weatherResponse = new WeatherResponse(null);
                         Log.d("HTTP", "Response error: " + error);
+                        weatherResponse.setErrorDescription(context.getString(R.string.error_connection));
                         callback.onResponseCallback(weatherResponse);
                     }
                 });
         queue.add(jsonObjectRequest);
     }
 
-    private String buildUrl(Context ctx) {
-        String url = ctx.getString(R.string.base_url) +
-                "?id=" + ctx.getString(R.string.city_id) +
-                "&appid=" + ctx.getString(R.string.weather_app_key) +
-                "&lang=" + ctx.getString(R.string.language_code) +
-                "&units=" + ctx.getString(R.string.units_code);
+    private String buildUrl(Context ctx, RequestParameters rp) {
+        String units = rp.getUnits();
+        String url;
+        if (units.isEmpty()) {
+            url = ctx.getString(R.string.base_url) +
+                    "?q=" + rp.getCity() +
+                    "&appid=" + ctx.getString(R.string.weather_app_key) +
+                    "&lang=" + ctx.getString(R.string.language_code);
+        } else {
+            url = ctx.getString(R.string.base_url) +
+                    "?q=" + rp.getCity() +
+                    "&appid=" + ctx.getString(R.string.weather_app_key) +
+                    "&lang=" + ctx.getString(R.string.language_code) +
+                    "&units=" + rp.getUnits();
+        }
         Log.d("HTTP", "URL builded: " + url);
         return url;
     }
-
-    private WeatherResponse weatherResponse;
-    private WeatherCallback callback;
 }
