@@ -53,6 +53,7 @@ import org.json.JSONObject;
  * }
  **/
 
+// TODO implement Serializable
 public class WeatherResponse {
 
     private String
