@@ -1,17 +1,14 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
+    <string name="app_name" translatable="false">WeatherApp</string>
     <string name="weather_app_key" translatable="false">0bb0ae1eff09edd7f903a6cef0cb3039</string>
-    <string name="city_id" translatable="false">1496153</string>
     <string name="base_url" translatable="false">https://api.openweathermap.org/data/2.5/weather</string>
-    <string name="error_parsing">JSON parging error</string>
+    <string name="error_parsing">JSON parsing error</string>
     <string name="error_connection">Server didn\'t respond or bad request</string>
     <string name="language_code">en</string>
     <string name="units_code" translatable="false">metric</string>
     <string name="degree_symbol" translatable="false">°</string>
     <string name="celsium" translatable="false">C</string>
     <string name="temp_label">Current temp</string>
-    <string name="temp_min_label">Min temp</string>
-    <string name="temp_max_label">Max temp</string>
     <string name="humidity_label">Humidity</string>
     <string name="not_available">n/a</string>
     <string name="city">City</string>
@@ -23,14 +20,7 @@
     <string name="pressure_label">Atmo pressure</string>
     <string name="pressure_units">mmHg</string>
     <string name="no_connection">Server is unreachable</string>
-    <string name="email">enter login here</string>
-    <string name="password">enter password here</string>
-    <string name="login">Log in</string>
-    <string name="login_success">Valid credentials</string>
-    <string name="login_fail">Invalid credentials</string>
-    <string name="login_label">Login</string>
-    <string name="password_label">Password</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Weather</string>
     <string name="metric_label" translatable="false">°C</string>
     <string name="imperial_label" translatable="false">°F</string>
     <string name="standart_label" translatable="false">K</string>
@@ -40,6 +30,14 @@
     <string name="enter_city_label">Enter city here</string>
     <string name="make_request">Make request</string>
     <string name="error_message_label">Error</string>
+    <string name="request_date_label">Request date</string>
+    <string name="add_button_label">Add</string>
+    <string name="read_button_label">Read</string>
+    <string name="remove_button_label">Wipe DB</string>
+    <string name="check_logs">Check logs</string>
+    <string name="open_db">Open DB</string>
+    <string name="inserted_at">Record inserted. ID=</string>
+    <string name="all_fields_required">All fields need to be not empty</string>
     <string-array name="cities" translatable="false">
         <item>Amsterdam</item>
         <item>Bremen</item>

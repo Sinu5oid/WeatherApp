@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import ru.omgtu.ivt.sine.weatherapp.Utils.RequestParameters;
 import ru.omgtu.ivt.sine.weatherapp.Utils.WeatherCallback;
@@ -17,8 +20,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
     private WeatherUtils utils;
     private TextView
             mainTemp,
-            minTemp,
-            maxTemp,
             humidity,
             city,
             description,
@@ -29,6 +30,7 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
             notAvailableLabel,
             unitsDegreeMark,
             unitsSpeedMark;
+    private final static String LOG_TAG = "WeatherActivity";
     private RequestParameters
             requestParameters;
 
@@ -38,33 +40,29 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
         setContentView(R.layout.activity_weather);
 
         mainTemp = findViewById(R.id.temp);
-        minTemp = findViewById(R.id.temp_min);
-        maxTemp = findViewById(R.id.temp_max);
         humidity = findViewById(R.id.humidity);
         city = findViewById(R.id.city);
         description = findViewById(R.id.description);
         wind = findViewById(R.id.wind);
         pressure = findViewById(R.id.pressure);
-
         pendingStateLabel = getString(R.string.pending_state);
         notAvailableLabel = getString(R.string.not_available);
 
         Intent intent = getIntent();
-        requestParameters = new RequestParameters(intent.getStringExtra("city"), intent.getIntExtra("units", RequestParameters.UNITS_DEFAULT));
+        requestParameters = new RequestParameters(getApplicationContext(), intent.getStringExtra("city"), intent.getIntExtra("units", RequestParameters.UNITS_DEFAULT));
 
         unitsDegreeMark = requestParameters.getUnitsDegreeMark();
         unitsSpeedMark = requestParameters.getUnitsSpeedMark();
+        Log.d(LOG_TAG, "units: " + unitsSpeedMark);
 
         utils = new WeatherUtils(this);
         utils.makeRequest(this, requestParameters);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     protected void onClick(View view) {
         mainTemp.setText(pendingStateLabel);
-        minTemp.setText(pendingStateLabel);
-        maxTemp.setText(pendingStateLabel);
         humidity.setText(pendingStateLabel);
         description.setText(pendingStateLabel);
         wind.setText(pendingStateLabel);
@@ -78,8 +76,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
             city.setText(getString(R.string.city));
             mainTemp.setText(wr.getErrorDescription());
             description.setText(getString(R.string.description));
-            minTemp.setText(notAvailableLabel);
-            maxTemp.setText(notAvailableLabel);
             humidity.setText(notAvailableLabel);
             wind.setText(notAvailableLabel);
             pressure.setText(notAvailableLabel);
@@ -87,8 +83,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
             city.setText(wr.getName());
             mainTemp.setText(String.format("%d%s", wr.getTemp(), unitsDegreeMark));
             description.setText(wr.getDescription());
-            minTemp.setText(String.format("%d%s", wr.getTemp_min(), unitsDegreeMark));
-            maxTemp.setText(String.format("%d%s", wr.getTemp_max(), unitsDegreeMark));
             humidity.setText(String.format("%s%%", wr.getHumidity()));
             wind.setText(String.format("%d %s", wr.getWind(), unitsSpeedMark));
             pressure.setText(String.format("%.2f %s", wr.getPressure(), getString(R.string.pressure_units)));

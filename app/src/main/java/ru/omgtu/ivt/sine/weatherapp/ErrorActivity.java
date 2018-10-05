@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class ErrorActivity extends AppCompatActivity {
 
     private TextView errorMessage;
+    private final static String TAG = "ErrorActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +19,7 @@ public class ErrorActivity extends AppCompatActivity {
 
         errorMessage = findViewById(R.id.error_message);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         errorMessage.setText(intent.getStringExtra("errorDescription"));

@@ -11,7 +11,7 @@
     tools:layout_editor_absoluteY="25dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/main_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadingEdge="vertical"
@@ -31,6 +31,7 @@
             tools:layout_editor_absoluteY="324dp" />
 
         <RadioGroup
+            android:id="@+id/mode_radio_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -74,6 +75,7 @@
             android:inputType="text" />
 
         <LinearLayout
+            android:id="@+id/units_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -142,6 +144,14 @@
             tools:layout_editor_absoluteX="20dp"
             tools:layout_editor_absoluteY="408dp" />
 
+        <Button
+            android:id="@+id/open_db"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="openDBActivity"
+            android:text="@string/open_db" />
+
     </LinearLayout>
 
     <ProgressBar
@@ -158,6 +168,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/main_root" />
 
 </android.support.constraint.ConstraintLayout>

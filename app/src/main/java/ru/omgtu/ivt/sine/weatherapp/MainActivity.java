@@ -23,6 +23,7 @@ public class MainActivity extends Activity implements WeatherCallback {
     private ProgressBar progressBar;
     private WeatherUtils weatherUtils;
     private RequestParameters requestParameters;
+    private final static String LOG_TAG = "MainActivity";
 
     @Override
     public void onResponseCallback(WeatherResponse wr) {
@@ -63,7 +64,6 @@ public class MainActivity extends Activity implements WeatherCallback {
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(ProgressBar.INVISIBLE);
-        // TODO CONTEXT???
         requestParameters = new RequestParameters(this);
     }
 
@@ -108,5 +108,10 @@ public class MainActivity extends Activity implements WeatherCallback {
         }
 
         weatherUtils.makeRequest(this, requestParameters);
+    }
+
+    protected void openDBActivity(View view) {
+        Intent intent = new Intent(this, DBActivity.class);
+        startActivity(intent);
     }
 }

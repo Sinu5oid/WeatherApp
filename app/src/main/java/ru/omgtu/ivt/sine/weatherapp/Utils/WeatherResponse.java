@@ -61,13 +61,13 @@ public class WeatherResponse {
     private String name;
     private String errorDescription;
     private long
-            temp,
-            humidity,
-            temp_min,
-            temp_max,
-            wind;
+            temp;
+    private long humidity;
+    private long wind;
     private double pressure;
     private boolean errorFlag;
+    private final static String LOG_TAG = "WeatherResponse";
+
     public WeatherResponse(JSONObject jsonObject) {
         if (jsonObject == null) {
             resetFieldsByDefault();
@@ -85,8 +85,6 @@ public class WeatherResponse {
             this.temp = Math.round(main.getDouble("temp"));
             this.pressure = main.getDouble("pressure") * 0.75006375541921;
             this.humidity = Math.round(main.getDouble("humidity"));
-            this.temp_min = Math.round(main.getDouble("temp_min"));
-            this.temp_max = Math.round(main.getDouble("temp_max"));
 
             JSONObject wind = jsonObject.getJSONObject("wind");
             this.wind = Math.round(wind.getDouble("speed"));
@@ -128,14 +126,6 @@ public class WeatherResponse {
         return humidity;
     }
 
-    public long getTemp_min() {
-        return temp_min;
-    }
-
-    public long getTemp_max() {
-        return temp_max;
-    }
-
     public long getWind() {
         return wind;
     }
@@ -149,8 +139,6 @@ public class WeatherResponse {
         name = "";
         temp = 0;
         humidity = 0;
-        temp_min = 0;
-        temp_max = 0;
         wind = 0;
         pressure = 0;
         errorDescription = "";

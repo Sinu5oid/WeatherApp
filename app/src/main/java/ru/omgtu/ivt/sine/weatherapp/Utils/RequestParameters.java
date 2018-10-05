@@ -1,11 +1,13 @@
 package ru.omgtu.ivt.sine.weatherapp.Utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import ru.omgtu.ivt.sine.weatherapp.R;
 
 public class RequestParameters {
 
+    private final static String LOG_TAG = "RequestParameters";
     public static final int UNITS_DEFAULT = 0;
     public static final int UNITS_CELSIUM = 1;
     public static final int UNITS_FARENHEIT = 2;
@@ -18,17 +20,19 @@ public class RequestParameters {
 
     public RequestParameters(final Context ctx) {
         this.city = "";
-        setUnits(UNITS_DEFAULT);
         this.ctx = ctx;
-    }
-
-    public RequestParameters(String city) {
-        this.city = city;
         setUnits(UNITS_DEFAULT);
     }
 
-    public RequestParameters(String city, int units) {
+    public RequestParameters(final Context ctx, String city) {
         this.city = city;
+        this.ctx = ctx;
+        setUnits(UNITS_DEFAULT);
+    }
+
+    public RequestParameters(final Context ctx, String city, int units) {
+        this.city = city;
+        this.ctx = ctx;
         setUnits(units);
     }
 

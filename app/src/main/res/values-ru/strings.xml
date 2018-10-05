@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_parsing">Ошибка парсинга JSON</string>
+    <string name="error_connection">Ошибка подключения к серверу</string>
+    <string name="language_code">ru</string>
+    <string name="temp_label">Текущая температура</string>
+    <string name="humidity_label">Влажность</string>
+    <string name="not_available">н/д</string>
+    <string name="city">Город</string>
+    <string name="description">Описание погоды</string>
+    <string name="wind_label">Ветер</string>
+    <string name="speed_units_metersph">м/c</string>
+    <string name="speed_units_milesph">м/ч</string>
+    <string name="pending_state">обновляется</string>
+    <string name="pressure_label">Давление воздуха</string>
+    <string name="pressure_units">мм рт. ст.</string>
+    <string name="no_connection">Сервер не отвечает</string>
+    <string name="title_activity_main">Погода</string>
+    <string name="units_label">Единицы измерения</string>
+    <string name="method_predefined">Выбрать из списка</string>
+    <string name="method_enter">Ввести самому</string>
+    <string name="enter_city_label">Введите название города</string>
+    <string name="make_request">Сделать запрос</string>
+    <string name="error_message_label">Ошибка</string>
+    <string name="request_date_label">Дата запроса</string>
+    <string name="add_button_label">Добавить</string>
+    <string name="read_button_label">Прочитать</string>
+    <string name="remove_button_label">Очистить базу</string>
+    <string name="check_logs">Проверьте логи</string>
+    <string name="open_db">Открыть базу</string>
+    <string name="inserted_at">Запись успешно вставлена. ID=</string>
+    <string name="all_fields_required">Поля должны быть не пустыми</string>
+</resources>

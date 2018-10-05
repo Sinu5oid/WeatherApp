@@ -18,6 +18,7 @@ public class WeatherUtils {
 
     private WeatherResponse weatherResponse;
     private WeatherCallback callback;
+    private final static String LOG_TAG = "WeatherUtils";
 
     public WeatherUtils(WeatherCallback callback) {
         this.callback = callback;
