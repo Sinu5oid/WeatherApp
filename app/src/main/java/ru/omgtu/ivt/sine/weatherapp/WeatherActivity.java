@@ -53,7 +53,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
 
         unitsDegreeMark = requestParameters.getUnitsDegreeMark();
         unitsSpeedMark = requestParameters.getUnitsSpeedMark();
-        Log.d(LOG_TAG, "units: " + unitsSpeedMark);
 
         utils = new WeatherUtils(this);
         utils.makeRequest(this, requestParameters);

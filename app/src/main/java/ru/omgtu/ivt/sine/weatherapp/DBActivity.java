@@ -121,6 +121,8 @@ public class DBActivity extends AppCompatActivity {
                         // а если следующей нет (текущая - последняя), то false - выходим из цикла
                     } while (c.moveToNext());
                 }
+                toastText = getString(R.string.records_count_label) + c.getCount();
+                ToastHelper.showToast(getApplicationContext(), toastText);
                 c.close();
                 break;
             case R.id.wipe:

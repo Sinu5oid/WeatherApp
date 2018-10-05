@@ -23,11 +23,12 @@
     <string name="make_request">Сделать запрос</string>
     <string name="error_message_label">Ошибка</string>
     <string name="request_date_label">Дата запроса</string>
-    <string name="add_button_label">Добавить</string>
-    <string name="read_button_label">Прочитать</string>
-    <string name="remove_button_label">Очистить базу</string>
+    <string name="add_button_label">Добавить запись</string>
+    <string name="read_button_label">Прочитать запись</string>
+    <string name="remove_button_label">Стереть всё</string>
     <string name="check_logs">Проверьте логи</string>
     <string name="open_db">Открыть базу</string>
     <string name="inserted_at">Запись успешно вставлена. ID=</string>
     <string name="all_fields_required">Поля должны быть не пустыми</string>
+    <string name="records_count_label">Записей в базе:</string>
 </resources>

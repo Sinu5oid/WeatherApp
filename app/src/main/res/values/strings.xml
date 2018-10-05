@@ -45,4 +45,5 @@
         <item>Omsk</item>
         <item>Saint Petersburg</item>
     </string-array>
+    <string name="records_count_label">Records in DB:</string>
 </resources>
