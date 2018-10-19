@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_parsing">Ошибка парсинга JSON</string>
-    <string name="error_connection">Ошибка подключения к серверу</string>
+    <string name="error_connection">Ошибка подключения к серверу. Для текущих параметров не найдены записи в кеше. Подключитесь к интернету или используйте корректные параметры и повторите запрос</string>
     <string name="language_code">ru</string>
     <string name="temp_label">Текущая температура</string>
     <string name="humidity_label">Влажность</string>
@@ -24,11 +24,15 @@
     <string name="error_message_label">Ошибка</string>
     <string name="request_date_label">Дата запроса</string>
     <string name="add_button_label">Добавить запись</string>
-    <string name="read_button_label">Прочитать запись</string>
+    <string name="read_button_label">Логировать записи</string>
     <string name="remove_button_label">Стереть всё</string>
     <string name="check_logs">Проверьте логи</string>
     <string name="open_db">Открыть базу</string>
     <string name="inserted_at">Запись успешно вставлена. ID=</string>
     <string name="all_fields_required">Поля должны быть не пустыми</string>
     <string name="records_count_label">Записей в базе:</string>
+    <string name="cachedLabel">Взято из кэша</string>
+    <string name="cached_date">Добавлено в кэш </string>
+    <string name="how_many_records">Записей в БД: </string>
+    <string name="how_many_records_deleted">Записей удалено: </string>
 </resources>

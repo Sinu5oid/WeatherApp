@@ -18,13 +18,17 @@ public class WeatherUtils {
 
     private WeatherResponse weatherResponse;
     private WeatherCallback callback;
+    private DataBaseHelper dataBaseHelper;
+    private Context context;
     private final static String LOG_TAG = "WeatherUtils";
 
-    public WeatherUtils(WeatherCallback callback) {
+    public WeatherUtils(final Context context, WeatherCallback callback) {
         this.callback = callback;
+        this.context = context;
+        dataBaseHelper = new DataBaseHelper(context);
     }
 
-    public void makeRequest(final Context context, RequestParameters requestParameters) {
+    public void makeRequest(final RequestParameters requestParameters) {
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -33,15 +37,16 @@ public class WeatherUtils {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        weatherResponse = new WeatherResponse(response);
+                        weatherResponse = new WeatherResponse(response, requestParameters);
                         Log.d("HTTP", "Response success: " + response.toString());
+                        dataBaseHelper.addRecord(weatherResponse);
                         callback.onResponseCallback(weatherResponse);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        weatherResponse = new WeatherResponse(null);
+                        weatherResponse = new WeatherResponse((JSONObject) null, null);
                         Log.d("HTTP", "Response error: " + error);
                         weatherResponse.setErrorDescription(context.getString(R.string.error_connection));
                         callback.onResponseCallback(weatherResponse);
@@ -50,22 +55,22 @@ public class WeatherUtils {
         queue.add(jsonObjectRequest);
     }
 
-    private String buildUrl(Context ctx, RequestParameters rp) {
+    private String buildUrl(Context context, RequestParameters rp) {
         String units = rp.getUnits();
         String url;
         if (units.isEmpty()) {
-            url = ctx.getString(R.string.base_url) +
+            url = context.getString(R.string.base_url) +
                     "?q=" + rp.getCity() +
-                    "&appid=" + ctx.getString(R.string.weather_app_key) +
-                    "&lang=" + ctx.getString(R.string.language_code);
+                    "&appid=" + context.getString(R.string.weather_app_key) +
+                    "&lang=" + context.getString(R.string.language_code);
         } else {
-            url = ctx.getString(R.string.base_url) +
+            url = context.getString(R.string.base_url) +
                     "?q=" + rp.getCity() +
-                    "&appid=" + ctx.getString(R.string.weather_app_key) +
-                    "&lang=" + ctx.getString(R.string.language_code) +
+                    "&appid=" + context.getString(R.string.weather_app_key) +
+                    "&lang=" + context.getString(R.string.language_code) +
                     "&units=" + rp.getUnits();
         }
-        Log.d("HTTP", "URL builded: " + url);
+        Log.d("HTTP", "URL built: " + url);
         return url;
     }
 }

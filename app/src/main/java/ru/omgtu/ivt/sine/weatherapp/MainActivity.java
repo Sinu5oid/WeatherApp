@@ -3,6 +3,7 @@ package ru.omgtu.ivt.sine.weatherapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import ru.omgtu.ivt.sine.weatherapp.Utils.DataBaseHelper;
 import ru.omgtu.ivt.sine.weatherapp.Utils.RequestParameters;
 import ru.omgtu.ivt.sine.weatherapp.Utils.WeatherCallback;
 import ru.omgtu.ivt.sine.weatherapp.Utils.WeatherResponse;
@@ -24,6 +26,7 @@ public class MainActivity extends Activity implements WeatherCallback {
     private WeatherUtils weatherUtils;
     private RequestParameters requestParameters;
     private final static String LOG_TAG = "MainActivity";
+    private DataBaseHelper dataBaseHelper;
 
     @Override
     public void onResponseCallback(WeatherResponse wr) {
@@ -31,15 +34,23 @@ public class MainActivity extends Activity implements WeatherCallback {
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
         if (wr == null) return;
-
+        dataBaseHelper.logRecords(getApplicationContext());
         Intent intent;
-        if (wr.getErrorFlag()) {
+        boolean haveCachedData = !dataBaseHelper.getRecord(requestParameters).getErrorFlag();
+
+        Log.d(LOG_TAG, "Launch error activity? Got error flag: " + wr.getErrorFlag() + "; Got haveCachedData: " + haveCachedData);
+        if (wr.getErrorFlag() && !haveCachedData) {
             intent = new Intent(this, ErrorActivity.class);
             intent.putExtra("errorDescription", wr.getErrorDescription());
         } else {
             intent = new Intent(this, WeatherActivity.class);
             intent.putExtra("city", requestParameters.getCity());
             intent.putExtra("units", requestParameters.getUnitsCode());
+            if (wr.getErrorFlag() && haveCachedData) {
+                intent.putExtra("useCache", true);
+            } else {
+                intent.putExtra("useCache", false);
+            }
         }
         startActivity(intent);
     }
@@ -47,6 +58,7 @@ public class MainActivity extends Activity implements WeatherCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
         citySpinner = findViewById(R.id.spinner);
@@ -64,7 +76,9 @@ public class MainActivity extends Activity implements WeatherCallback {
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(ProgressBar.INVISIBLE);
+
         requestParameters = new RequestParameters(this);
+        dataBaseHelper = new DataBaseHelper(getApplicationContext());
     }
 
     protected void onModeGroupClick(View view) {
@@ -100,18 +114,54 @@ public class MainActivity extends Activity implements WeatherCallback {
         makeRequestButton.setEnabled(false);
         progressBar.setVisibility(ProgressBar.VISIBLE);
 
-        weatherUtils = new WeatherUtils(this);
+        weatherUtils = new WeatherUtils(getApplicationContext(), this);
         if (citySpinner.isEnabled()) {
             requestParameters.setCity(citySpinner.getSelectedItem().toString());
         } else {
             requestParameters.setCity(cityInput.getText().toString());
         }
 
-        weatherUtils.makeRequest(this, requestParameters);
+        weatherUtils.makeRequest(requestParameters);
     }
 
     protected void openDBActivity(View view) {
         Intent intent = new Intent(this, DBActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "onStart");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "onRestart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG, "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "onDestroy");
     }
 }

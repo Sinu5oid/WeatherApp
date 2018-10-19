@@ -37,7 +37,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".DBActivity" android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".DBActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DBRecordsActivity"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="ru.omgtu.ivt.sine.weatherapp.dbshow" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            >
+        </activity>
     </application>
 
 </manifest>

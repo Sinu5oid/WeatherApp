@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Objects;
 
+import ru.omgtu.ivt.sine.weatherapp.Utils.DataBaseHelper;
+import ru.omgtu.ivt.sine.weatherapp.Utils.DateHelper;
 import ru.omgtu.ivt.sine.weatherapp.Utils.RequestParameters;
 import ru.omgtu.ivt.sine.weatherapp.Utils.WeatherCallback;
 import ru.omgtu.ivt.sine.weatherapp.Utils.WeatherResponse;
@@ -24,7 +26,8 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
             city,
             description,
             wind,
-            pressure;
+            pressure,
+            cachedDate;
     private String
             pendingStateLabel,
             notAvailableLabel,
@@ -33,6 +36,12 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
     private final static String LOG_TAG = "WeatherActivity";
     private RequestParameters
             requestParameters;
+    private DataBaseHelper
+            dataBaseHelper;
+    private LinearLayout
+            cachedBlock;
+    private WeatherResponse
+            weatherResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +54,28 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
         description = findViewById(R.id.description);
         wind = findViewById(R.id.wind);
         pressure = findViewById(R.id.pressure);
+        cachedBlock = findViewById(R.id.cached_block);
+        cachedDate = findViewById(R.id.cachedDate);
         pendingStateLabel = getString(R.string.pending_state);
         notAvailableLabel = getString(R.string.not_available);
+
+        dataBaseHelper = new DataBaseHelper(getApplicationContext());
 
         Intent intent = getIntent();
         requestParameters = new RequestParameters(getApplicationContext(), intent.getStringExtra("city"), intent.getIntExtra("units", RequestParameters.UNITS_DEFAULT));
 
+
         unitsDegreeMark = requestParameters.getUnitsDegreeMark();
         unitsSpeedMark = requestParameters.getUnitsSpeedMark();
 
-        utils = new WeatherUtils(this);
-        utils.makeRequest(this, requestParameters);
+        weatherResponse = dataBaseHelper.getRecord(requestParameters);
+
+        if (intent.getBooleanExtra("useCache", false)) {
+            cachedDate.setText(String.format("%s %s", getString(R.string.cached_date), DateHelper.formatDate(weatherResponse.getRequest_date())));
+            cachedBlock.setVisibility(View.VISIBLE);
+        }
+
+        onResponseCallback(weatherResponse);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
@@ -66,7 +86,6 @@ public class WeatherActivity extends AppCompatActivity implements WeatherCallbac
         description.setText(pendingStateLabel);
         wind.setText(pendingStateLabel);
         pressure.setText(pendingStateLabel);
-        utils.makeRequest(this, requestParameters);
     }
 
     @SuppressLint("DefaultLocale")

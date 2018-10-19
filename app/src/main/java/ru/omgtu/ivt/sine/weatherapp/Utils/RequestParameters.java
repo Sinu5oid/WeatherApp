@@ -1,7 +1,6 @@
 package ru.omgtu.ivt.sine.weatherapp.Utils;
 
 import android.content.Context;
-import android.util.Log;
 
 import ru.omgtu.ivt.sine.weatherapp.R;
 

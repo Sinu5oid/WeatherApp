@@ -3,7 +3,7 @@
     <string name="weather_app_key" translatable="false">0bb0ae1eff09edd7f903a6cef0cb3039</string>
     <string name="base_url" translatable="false">https://api.openweathermap.org/data/2.5/weather</string>
     <string name="error_parsing">JSON parsing error</string>
-    <string name="error_connection">Server didn\'t respond or bad request</string>
+    <string name="error_connection">Server didn\'t respond or bad request. Have no records in cache with current settings. Connect to the internet or change parameters and try again.</string>
     <string name="language_code">en</string>
     <string name="units_code" translatable="false">metric</string>
     <string name="degree_symbol" translatable="false">°</string>
@@ -32,7 +32,7 @@
     <string name="error_message_label">Error</string>
     <string name="request_date_label">Request date</string>
     <string name="add_button_label">Add</string>
-    <string name="read_button_label">Read</string>
+    <string name="read_button_label">Log records</string>
     <string name="remove_button_label">Wipe DB</string>
     <string name="check_logs">Check logs</string>
     <string name="open_db">Open DB</string>
@@ -46,4 +46,9 @@
         <item>Saint Petersburg</item>
     </string-array>
     <string name="records_count_label">Records in DB:</string>
+    <string name="title_activity_dbrecords">DBRecordsActivity</string>
+    <string name="cachedLabel">Using cached values</string>
+    <string name="cached_date">Cached </string>
+    <string name="how_many_records">Records in DB: </string>
+    <string name="how_many_records_deleted">Records deleted: </string>
 </resources>
