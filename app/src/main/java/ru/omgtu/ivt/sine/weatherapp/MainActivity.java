@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 import ru.omgtu.ivt.sine.weatherapp.Utils.DataBaseHelper;
 import ru.omgtu.ivt.sine.weatherapp.Utils.RequestParameters;
@@ -25,6 +27,7 @@ public class MainActivity extends Activity implements WeatherCallback {
     private ProgressBar progressBar;
     private WeatherUtils weatherUtils;
     private RequestParameters requestParameters;
+    private ToggleButton toggleServiceButton;
     private final static String LOG_TAG = "MainActivity";
     private DataBaseHelper dataBaseHelper;
 
@@ -77,6 +80,14 @@ public class MainActivity extends Activity implements WeatherCallback {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
+        toggleServiceButton = findViewById(R.id.tb_service);
+        toggleServiceButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                toggleService(buttonView, isChecked);
+            }
+        });
+
         requestParameters = new RequestParameters(this);
         dataBaseHelper = new DataBaseHelper(getApplicationContext());
     }
@@ -127,6 +138,15 @@ public class MainActivity extends Activity implements WeatherCallback {
     protected void openDBActivity(View view) {
         Intent intent = new Intent(this, DBActivity.class);
         startActivity(intent);
+    }
+
+    protected void toggleService(CompoundButton button, boolean isChecked) {
+        Intent service = new Intent(this, WeatherService.class);
+        if (isChecked) {
+            stopService(service);
+        } else {
+            startService(service);
+        }
     }
 
     @Override
