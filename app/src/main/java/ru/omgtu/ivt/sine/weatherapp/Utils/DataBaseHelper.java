@@ -45,8 +45,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("request_date", DateHelper.getCurrentTimeStamp());
         contentValues.put("description", wr.getDescription());
         contentValues.put("temperature", wr.getTemp());
-        contentValues.put("humidity", wr.getTemp());
-        contentValues.put("pressure", wr.getTemp());
+        contentValues.put("humidity", wr.getHumidity());
+        contentValues.put("pressure", wr.getPressure());
         contentValues.put("wind", wr.getWind());
         contentValues.put("units", wr.getUnits());
 
